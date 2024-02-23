@@ -6,7 +6,7 @@ const dbConnect=()=>{
     .catch((error)=>{
         console.log("Issue in DB Connection")
         console.error(error.message);
-        process.exit(1);
+        process.exit(1);  //stop the code with errors
     })
 }
 module.exports = dbConnect;
