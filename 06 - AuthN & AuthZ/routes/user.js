@@ -1,12 +1,12 @@
-//import router
+//step 1: import router
 const express = require('express');
 const router = express.Router();
 
-//import controller
+//step 2: import controller
 const {login, signup}= require('../controllers/Auth')
 const {auth, isStudent, isAdmin}= require('../middlewares/auth')
 
-//route mapping
+//step 3: routes mapping
 router.post("/signup", signup);
 router.post("/login", login);
 

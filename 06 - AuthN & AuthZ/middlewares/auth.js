@@ -6,8 +6,11 @@ require('dotenv').config();
 exports.auth =(req, res, next)=>{ //next used for call the next middleware
     try{
         //extract JWT token
-        //pending: other ways to fetch token
-        const token = req.body.token;
+        //other ways to fetch token: 1) req.body.token(payload mein pass kiya hoga) 2) req.cookies.cookies_name(required cookie-parser) 3) header(efficient method & secure)
+        console.log("body", req.body.token )
+        console.log("cookie",  req.cookies.sachin_cookie)
+        console.log("header",req.header("Authorization"))
+        const token =  req.body.token || req.cookies.sachin_cookie ||req.header("Authorization").replace("Bearer","");
         if(!token){
             return res.status(401).json({
                 success: false,
@@ -33,7 +36,8 @@ exports.auth =(req, res, next)=>{ //next used for call the next middleware
     } catch(error){
         return res.status(401).json({
             success:false,
-            message:"Something went wrong, while verifying the token"
+            message:"Something went wrong, while verifying the token",
+            error:error.message
         })
     }
 }
